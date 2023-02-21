@@ -27,11 +27,8 @@ public class Quest
     {
         return new QuestDto
         {
-            PublicId = PublicId.Value,
             Title = Title,
-            Description = Description,
-            CreatedAt = CreatedAt,
-            Status = Status
+            Description = Description
         };
     }
 }

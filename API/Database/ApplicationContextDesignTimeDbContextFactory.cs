@@ -21,11 +21,6 @@ public class ApplicationContextDesignTimeDbContextFactory : IDesignTimeDbContext
                 connectionString,
                 ServerVersion.AutoDetect(connectionString),
                 opts => opts.MigrationsAssembly("API"));
-        // .UseSqlServer(connectionString,
-        //         options =>
-        //         {
-        //             options.MigrationsAssembly("API.API");
-        //         });
         
         return new ApplicationContext(builder.Options);
     }

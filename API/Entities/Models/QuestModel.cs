@@ -5,6 +5,7 @@ namespace API.Entities.Models;
 
 public class QuestModel
 {
+    [Required] public Guid? PublicId { get; set; }
     [Required, StringLength(30)] public string Title { get; set; }
 
     [StringLength(1024)] public string Description { get; set; }
@@ -17,9 +18,10 @@ public class QuestModel
     {
         return new Quest
         {
+            PublicId = Guid.NewGuid(),
             Title = Title,
             Description = Description,
-            CreatedAt = CreatedAt,
+            CreatedAt = DateTime.Now,
             Status = Status
         };
     }

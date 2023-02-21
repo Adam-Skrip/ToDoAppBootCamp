@@ -7,9 +7,9 @@ public sealed class Program
     public static async Task Main(string[] args)
     {
         IHost host = CreateHostBuilder(args).Build();
-        await host.MigrateDbContextAsync<ApplicationContext>();
-
         host.Run();
+        await host.MigrateDbContextAsync<ApplicationContext>();
+        
     }
 
     public static IHostBuilder CreateHostBuilder(string[] args) =>
