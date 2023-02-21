@@ -21,7 +21,7 @@ public class Startup
             options.AddPolicy(name: "CorsPolicy",
                 builder =>
                 {
-                    builder.WithOrigins("https://localhost:4200", "http://localhost:4200", "http://localhost:5001","https://localhost:5000" )
+                    builder.WithOrigins("https://localhost:4200", "http://localhost:4200", "https://localhost:5001","http://localhost:5000" )
                         .AllowAnyHeader()
                         .AllowAnyMethod();
                 });
@@ -70,7 +70,7 @@ public class Startup
 
         app.UseRouting();
 
-        // app.UseCors("CorsPolicy");
+        app.UseCors("CorsPolicy");
 
         app.UseAuthorization();
 
