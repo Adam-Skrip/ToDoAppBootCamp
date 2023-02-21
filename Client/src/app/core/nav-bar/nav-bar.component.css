@@ -1,3 +1,7 @@
+nav{
+  color: #3E363F;
+}
+
 li{
   padding-left: 10px;
   padding-right: 10px;
@@ -5,4 +9,13 @@ li{
 
 li:hover{
 
+}
+
+.active-link {
+  border-bottom: 2px solid #F50057;
+}
+
+.rounded-md{
+  background-color: #3E363F;
+  border-color: #3E363F;
 }

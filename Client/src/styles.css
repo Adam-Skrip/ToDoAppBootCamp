@@ -1,8 +1,12 @@
+@import "~bootstrap-icons/font/bootstrap-icons.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 body{
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Red Hat Display', sans-serif;
 
 }
+
+
