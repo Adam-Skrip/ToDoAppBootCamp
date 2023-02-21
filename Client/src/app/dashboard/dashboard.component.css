@@ -1,0 +1,13 @@
+.dashboard{
+  width: 50%;
+  margin: 60px auto;
+}
+
+mat-form-field{
+  width: 1000px;
+}
+
+.bi-plus-circle{
+  font-size: 40px;
+  color: #F50057;
+}
