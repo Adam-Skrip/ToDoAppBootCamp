@@ -8,9 +8,7 @@ import {FormBuilder} from "@angular/forms";
 })
 export class TaskComponent {
   taskList = this._formBuilder.group({
-    pepperoni: false,
-    extracheese: false,
-    mushroom: false,
+    task: false,
   });
 
   constructor(private _formBuilder: FormBuilder) {
