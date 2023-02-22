@@ -1,4 +1,7 @@
-﻿using API.DependencyInjection;
+﻿using System.Text;
+using API.DependencyInjection;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 
 namespace API;
@@ -50,8 +53,44 @@ public class Startup
                 Description = "Development localhost server - Kestrel",
                 Url = "https://localhost:5001"
             });
-            
+            var securitySchema = new OpenApiSecurityScheme()
+            {
+                Description = "JWT Auth Bearer Scheme",
+                Name = "Authorization",
+                In = ParameterLocation.Header,
+                Type = SecuritySchemeType.Http,
+                Scheme = "bearer",
+                Reference = new OpenApiReference()
+                {
+                    Type = ReferenceType.SecurityScheme,
+                    Id = "Bearer"
+                }
+            };
+            var securityRequirement = new OpenApiSecurityRequirement()
+            {
+                {
+                    securitySchema,
+                    new[] { "Bearer" }
+                }
+            };
+            c.AddSecurityDefinition("Bearer", securitySchema);
+            c.AddSecurityRequirement(securityRequirement);
         });
+        
+        services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            .AddJwtBearer(options =>
+            {
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    NameClaimType = "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name",
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration.GetSection("Token:Key").Value)),
+                    ValidIssuer = Configuration.GetSection("Token:Issuer").Value,
+                    ValidateIssuer = true,
+                    ValidateAudience = false
+                };
+            });
+        
         services.AddRouting(options => options.LowercaseUrls = true);
         services.AddMemoryCache();
         services.AddApplicationServices(Configuration, Environment);

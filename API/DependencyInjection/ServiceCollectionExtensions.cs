@@ -28,7 +28,7 @@ public static class ServiceCollectionExtensions
     {
         services.AddTransient<ITaskService, TaskService>();
         services.AddTransient<IAuthService, AuthService>();
-        // services.AddTransient<ICatalogService, CatalogService>();
+        services.AddTransient<IBasketService, BasketService>();
         // services.AddTransient<IBasketService, BasketService>();
     }
 

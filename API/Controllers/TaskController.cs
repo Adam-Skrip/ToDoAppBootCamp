@@ -1,6 +1,7 @@
 ﻿using API.Entities.DTO;
 using API.Entities.Models;
 using API.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 
@@ -18,6 +19,7 @@ public class TaskController : ControllerBase
     }
 
     [HttpGet]
+    [Authorize]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(QuestDto))]
     [SwaggerOperation(
         summary: "Retrieve Tasks",
@@ -26,11 +28,14 @@ public class TaskController : ControllerBase
         Tags = new[] { "Task API" })]
     public async Task<IActionResult> GetTasksAsync(CancellationToken ct)
     {
-        List<QuestModel> listOfTasks = await _taskService.GetAllAsync(ct);
+        var user = HttpContext.User.Identity!.Name;
+
+        List<QuestModel> listOfTasks = await _taskService.GetAllAsync(user, ct);
         return Ok(listOfTasks);
     }
 
     [HttpPost("new")]
+    [Authorize]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(QuestDto))]
     [SwaggerOperation(
         summary: "Create Task",
@@ -38,9 +43,11 @@ public class TaskController : ControllerBase
         OperationId = "createTask",
         Tags = new[] { "Task API" })]
     public async Task<IActionResult> CreateTask
-        (QuestDto questDto, CancellationToken ct)
+        (QuestDto questDto,string basket, CancellationToken ct)
     {
-        QuestModel dto = await _taskService.CreateAsync(questDto, ct);
+        var user = HttpContext.User.Identity!.Name;
+
+        QuestModel dto = await _taskService.CreateAsync(user,basket ,questDto, ct);
         return StatusCode(StatusCodes.Status201Created, dto);
     }
 }
