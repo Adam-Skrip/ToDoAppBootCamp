@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "+Iz5RUTtsfZjNHaMimAvzpRBGmgPfszU269lsFlZOgGOd6KwRp7sqnzEHSe0J4O9HhyjVUpfdxIV3kQICJ/rog==",
+  "dgSpecHash": "IicSmm/cF0/7o6Zw+PTUVb67c0cQWtfS7fsJxVQ+k6P+mGSgizyjYYfpChyNHp2lONnekfYktN6B7hLfy74B4Q==",
   "success": true,
   "projectFilePath": "C:\\programovanie\\visma\\ToDoAppBootCamp\\API\\API.csproj",
   "expectedPackageFiles": [
@@ -11,6 +11,7 @@
     "C:\\Users\\adam.skrip\\.nuget\\packages\\microsoft.aspnetcore.antiforgery\\2.2.0\\microsoft.aspnetcore.antiforgery.2.2.0.nupkg.sha512",
     "C:\\Users\\adam.skrip\\.nuget\\packages\\microsoft.aspnetcore.authentication.abstractions\\2.2.0\\microsoft.aspnetcore.authentication.abstractions.2.2.0.nupkg.sha512",
     "C:\\Users\\adam.skrip\\.nuget\\packages\\microsoft.aspnetcore.authentication.core\\2.2.0\\microsoft.aspnetcore.authentication.core.2.2.0.nupkg.sha512",
+    "C:\\Users\\adam.skrip\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\7.0.3\\microsoft.aspnetcore.authentication.jwtbearer.7.0.3.nupkg.sha512",
     "C:\\Users\\adam.skrip\\.nuget\\packages\\microsoft.aspnetcore.authorization\\2.2.0\\microsoft.aspnetcore.authorization.2.2.0.nupkg.sha512",
     "C:\\Users\\adam.skrip\\.nuget\\packages\\microsoft.aspnetcore.authorization.policy\\2.2.0\\microsoft.aspnetcore.authorization.policy.2.2.0.nupkg.sha512",
     "C:\\Users\\adam.skrip\\.nuget\\packages\\microsoft.aspnetcore.cors\\2.2.0\\microsoft.aspnetcore.cors.2.2.0.nupkg.sha512",
@@ -107,7 +108,7 @@
     "C:\\Users\\adam.skrip\\.nuget\\packages\\microsoft.identitymodel.protocols\\6.24.0\\microsoft.identitymodel.protocols.6.24.0.nupkg.sha512",
     "C:\\Users\\adam.skrip\\.nuget\\packages\\microsoft.identitymodel.protocols.openidconnect\\6.24.0\\microsoft.identitymodel.protocols.openidconnect.6.24.0.nupkg.sha512",
     "C:\\Users\\adam.skrip\\.nuget\\packages\\microsoft.identitymodel.tokens\\6.27.0\\microsoft.identitymodel.tokens.6.27.0.nupkg.sha512",
-    "C:\\Users\\adam.skrip\\.nuget\\packages\\microsoft.net.http.headers\\2.2.0\\microsoft.net.http.headers.2.2.0.nupkg.sha512",
+    "C:\\Users\\adam.skrip\\.nuget\\packages\\microsoft.net.http.headers\\2.2.8\\microsoft.net.http.headers.2.2.8.nupkg.sha512",
     "C:\\Users\\adam.skrip\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
     "C:\\Users\\adam.skrip\\.nuget\\packages\\microsoft.netcore.targets\\1.1.0\\microsoft.netcore.targets.1.1.0.nupkg.sha512",
     "C:\\Users\\adam.skrip\\.nuget\\packages\\microsoft.openapi\\1.4.3\\microsoft.openapi.1.4.3.nupkg.sha512",

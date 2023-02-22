@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using API.Entities.DTO;
 using API.Entities.Models;
 
@@ -23,6 +24,10 @@ public class Quest
 
     [Required] 
     public string Status { get; set; } = "Not Assigned";
+   
+    public int BasketId { get; set; }
+    
+    public QuestBasket Basket { get; set; }
 
     public QuestModel ToDto()
     {

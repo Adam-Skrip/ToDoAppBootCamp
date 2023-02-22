@@ -95,3 +95,4 @@ C:\programovanie\visma\ToDoAppBootCamp\API\bin\Debug\net7.0\Newtonsoft.Json.Bson
 C:\programovanie\visma\ToDoAppBootCamp\API\bin\Debug\net7.0\Swashbuckle.AspNetCore.Annotations.dll
 C:\programovanie\visma\ToDoAppBootCamp\API\obj\Debug\net7.0\API.RazorAssemblyInfo.cache
 C:\programovanie\visma\ToDoAppBootCamp\API\obj\Debug\net7.0\API.RazorAssemblyInfo.cs
+C:\programovanie\visma\ToDoAppBootCamp\API\bin\Debug\net7.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll

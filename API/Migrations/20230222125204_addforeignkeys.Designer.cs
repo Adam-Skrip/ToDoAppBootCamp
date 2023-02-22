@@ -3,6 +3,7 @@ using System;
 using API.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    partial class ApplicationContextModelSnapshot : ModelSnapshot
+    [Migration("20230222125204_addforeignkeys")]
+    partial class addforeignkeys
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -23,9 +26,6 @@ namespace API.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<int>("BasketId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedAt")
@@ -49,31 +49,14 @@ namespace API.Migrations
                         .HasMaxLength(30)
                         .HasColumnType("varchar(30)");
 
-                    b.HasKey("Id");
-
-                    b.HasIndex("BasketId");
-
-                    b.ToTable("Quests");
-                });
-
-            modelBuilder.Entity("API.Entities.Domain.QuestBasket", b =>
-                {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
-                    b.Property<string>("name")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Baskets");
+                    b.ToTable("Quests");
                 });
 
             modelBuilder.Entity("API.Entities.Domain.User", b =>
@@ -106,19 +89,8 @@ namespace API.Migrations
 
             modelBuilder.Entity("API.Entities.Domain.Quest", b =>
                 {
-                    b.HasOne("API.Entities.Domain.QuestBasket", "Basket")
-                        .WithMany("Quests")
-                        .HasForeignKey("BasketId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Basket");
-                });
-
-            modelBuilder.Entity("API.Entities.Domain.QuestBasket", b =>
-                {
                     b.HasOne("API.Entities.Domain.User", "User")
-                        .WithMany("Baskets")
+                        .WithMany("Quests")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -126,14 +98,9 @@ namespace API.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("API.Entities.Domain.QuestBasket", b =>
-                {
-                    b.Navigation("Quests");
-                });
-
             modelBuilder.Entity("API.Entities.Domain.User", b =>
                 {
-                    b.Navigation("Baskets");
+                    b.Navigation("Quests");
                 });
 #pragma warning restore 612, 618
         }

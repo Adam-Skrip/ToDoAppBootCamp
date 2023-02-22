@@ -20,4 +20,6 @@ public class User
     [Required,EmailAddress]
     public string Email { get; set; }
     
+    public ICollection<QuestBasket> Baskets { get; set; }
+    
 }
