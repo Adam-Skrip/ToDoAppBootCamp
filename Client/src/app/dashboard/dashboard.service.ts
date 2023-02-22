@@ -9,11 +9,13 @@ import {ITaskResult} from "../shared/models/ITaskResult";
 })
 export class DashboardService {
 
+  baseUrl = "https://localhost:5001/api/task";
+
 
   constructor(private http:HttpClient) { }
 
   getAllTasks() {
-    return this.http.get<ITaskResult[]>("http://localhost:5001/api/task");
+    return this.http.get<ITaskResult[]>(this.baseUrl);
   }
 
   getTask(){
@@ -21,6 +23,7 @@ export class DashboardService {
   }
 
   addTask(task: ITask){
+    return this.http.post(this.baseUrl+"/new", task);
 
   }
 
