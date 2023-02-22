@@ -26,7 +26,7 @@ public class TaskController : ControllerBase
         Tags = new[] { "Task API" })]
     public async Task<IActionResult> GetTasksAsync(CancellationToken ct)
     {
-        List<QuestDto> listOfTasks = await _taskService.GetAllAsync(ct);
+        List<QuestModel> listOfTasks = await _taskService.GetAllAsync(ct);
         return Ok(listOfTasks);
     }
 
@@ -40,7 +40,7 @@ public class TaskController : ControllerBase
     public async Task<IActionResult> CreateTask
         (QuestDto questDto, CancellationToken ct)
     {
-        QuestDto dto = await _taskService.CreateAsync(questDto, ct);
+        QuestModel dto = await _taskService.CreateAsync(questDto, ct);
         return StatusCode(StatusCodes.Status201Created, dto);
     }
 }
