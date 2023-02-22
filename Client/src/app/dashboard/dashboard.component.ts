@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {DashboardService} from "./dashboard.service";
-import {ITaskResult} from "../shared/models/ITaskResult";
-import {ITask} from "../shared/models/ITask";
+import {ITaskResult} from "../shared/models/task/ITaskResult";
+import {ITask} from "../shared/models/task/ITask";
 
 @Component({
   selector: 'app-dashboard',
@@ -44,6 +44,10 @@ export class DashboardComponent implements OnInit {
         this.getTasks()
       }
     );
+
+  }
+
+  addList() {
 
   }
 }

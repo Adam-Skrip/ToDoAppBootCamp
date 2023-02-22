@@ -7,6 +7,17 @@ mat-form-field{
   width: 1000px;
 }
 
+.add-list{
+  cursor: pointer;
+  transition: transform .2s ease-out;
+
+}
+
+.add-list:hover{
+  transform: scale(1.1);
+  -ms-transform: scale(1.1);
+}
+
 .bi-plus-circle{
   cursor: pointer;
   font-size: 40px;
@@ -16,5 +27,12 @@ mat-form-field{
 
 .bi-plus-circle:hover{
   transform: scale(1.1);
-
+  -ms-transform: scale(1.1);
 }
+
+.bi-file-earmark-plus{
+  cursor: pointer;
+  font-size: 50px;
+  color: #3E363F;
+}
+

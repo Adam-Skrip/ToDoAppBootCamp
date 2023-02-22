@@ -1,6 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {FormBuilder} from "@angular/forms";
-import {ITaskResult} from "../../models/ITaskResult";
+import {ITaskResult} from "../../models/task/ITaskResult";
 
 @Component({
   selector: 'app-task',

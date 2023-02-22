@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import {environment} from "../../environments/environment";
 import {HttpClient} from "@angular/common/http";
-import {ITask} from "../shared/models/ITask";
-import {ITaskResult} from "../shared/models/ITaskResult";
+import {ITask} from "../shared/models/task/ITask";
+import {ITaskResult} from "../shared/models/task/ITaskResult";
 
 @Injectable({
   providedIn: 'root'

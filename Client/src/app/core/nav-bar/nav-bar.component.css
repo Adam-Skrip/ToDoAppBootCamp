@@ -19,3 +19,7 @@ li:hover{
   background-color: #3E363F;
   border-color: #3E363F;
 }
+
+.button{
+  cursor: pointer;
+}
