@@ -8,6 +8,13 @@ mat-form-field{
 }
 
 .bi-plus-circle{
+  cursor: pointer;
   font-size: 40px;
   color: #F50057;
+  transition: transform .2s ease-out;
+}
+
+.bi-plus-circle:hover{
+  transform: scale(1.1);
+
 }

@@ -1,1 +1,25 @@
-<p>login works!</p>
+
+      <div class="modal-body">
+        <mat-form-field appearance="fill">
+          <mat-label class="m-label">Username</mat-label>
+          <input matInput  name="username">
+
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Password</mat-label>
+          <input matInput  name="password" [type]="hide ? 'password' : 'text'">
+          <i class="bi bi-lock-fill" matPrefix></i>
+          <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                  [attr.aria-pressed]="hide">
+<!--            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>-->
+          </button>
+        </mat-form-field>
+      </div>
+      <div class="modal-footer text-center">
+        <button class="btn-login" mat-raised-button color="primary" type="button" >Login</button>
+
+        <p class="w-100 mt-5">Need an account?
+        </p>
+
+
+      </div>

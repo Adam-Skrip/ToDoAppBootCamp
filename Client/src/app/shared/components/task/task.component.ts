@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {FormBuilder} from "@angular/forms";
+import {ITaskResult} from "../../models/ITaskResult";
 
 @Component({
   selector: 'app-task',
@@ -7,10 +8,9 @@ import {FormBuilder} from "@angular/forms";
   styleUrls: ['./task.component.css']
 })
 export class TaskComponent {
+  @Input("taskInput") task! : ITaskResult;
   taskList = this._formBuilder.group({
-    pepperoni: false,
-    extracheese: false,
-    mushroom: false,
+    task: false,
   });
 
   constructor(private _formBuilder: FormBuilder) {

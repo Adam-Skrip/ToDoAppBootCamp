@@ -1,10 +1,13 @@
 <div class="dashboard">
   <div class="add-task flex ">
     <mat-form-field appearance="outline">
-      <input matInput placeholder="Add task" >
+      <input matInput placeholder="Add task" [(ngModel)]="taskTitle">
     </mat-form-field>
-    <i class="bi bi-plus-circle px-3"></i>
+    <i (click)="addTask()" class="bi bi-plus-circle px-3"></i>
   </div>
-  <app-task></app-task>
+  <div class="task" *ngFor="let task of taskList">
+    <app-task [taskInput]="task"></app-task>
+  </div>
+
 </div>
 
