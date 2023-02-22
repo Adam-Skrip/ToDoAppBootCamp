@@ -17,10 +17,10 @@ public class TaskService : ITaskService
         _context = context;
     }
 
-    public async Task<List<QuestDto>> GetAllAsync(CancellationToken ct = default)
+    public async Task<List<QuestModel>> GetAllAsync(CancellationToken ct = default)
     {
         List<Quest> tasks = await _context.Quests.AsNoTracking().ToListAsync();
-        List<QuestDto> dtasks = tasks.Select(o => o.ToDto()).ToList();
+        List<QuestModel> dtasks = tasks.Select(o => o.ToDto()).ToList();
 
         return dtasks;
     }
@@ -30,7 +30,7 @@ public class TaskService : ITaskService
         throw new NotImplementedException();
     }
 
-    public async Task<QuestDto> CreateAsync(QuestDto dto, CancellationToken ct = default)
+    public async Task<QuestModel> CreateAsync(QuestDto dto, CancellationToken ct = default)
     {
         var quest = new Quest
         {

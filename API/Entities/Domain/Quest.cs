@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using API.Entities.DTO;
+using API.Entities.Models;
 
 namespace API.Entities.Domain;
 
@@ -23,12 +24,14 @@ public class Quest
     [Required] 
     public string Status { get; set; } = "Not Assigned";
 
-    public QuestDto ToDto()
+    public QuestModel ToDto()
     {
-        return new QuestDto
+        return new QuestModel
         {
             Title = Title,
-            Description = Description
+            Description = Description,
+            CreatedAt = CreatedAt,
+            Status = Status
         };
     }
 }

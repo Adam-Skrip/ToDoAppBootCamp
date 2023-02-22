@@ -5,13 +5,12 @@ namespace API.Entities.Models;
 
 public class QuestModel
 {
-    [Required] public Guid? PublicId { get; set; }
     [Required, StringLength(30)] public string Title { get; set; }
 
     [StringLength(1024)] public string Description { get; set; }
 
     [Required] public DateTime CreatedAt { get; set; }
-
+    
     [Required] public string Status { get; set; }
 
     public Quest ToDomain()
@@ -22,7 +21,7 @@ public class QuestModel
             Title = Title,
             Description = Description,
             CreatedAt = DateTime.Now,
-            Status = Status
+            Status = "Not Assigned"
         };
     }
 }
