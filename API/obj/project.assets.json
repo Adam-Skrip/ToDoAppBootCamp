@@ -11875,24 +11875,26 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\adam.skrip\\.nuget\\packages\\": {}
+    "C:\\Users\\ladislav.kristofco\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\programovanie\\visma\\ToDoAppBootCamp\\API\\API.csproj",
+      "projectUniqueName": "C:\\Users\\ladislav.kristofco\\Desktop\\Visma\\ToDoAppBootCamp\\API\\API.csproj",
       "projectName": "API",
-      "projectPath": "C:\\programovanie\\visma\\ToDoAppBootCamp\\API\\API.csproj",
-      "packagesPath": "C:\\Users\\adam.skrip\\.nuget\\packages\\",
-      "outputPath": "C:\\programovanie\\visma\\ToDoAppBootCamp\\API\\obj\\",
+      "projectPath": "C:\\Users\\ladislav.kristofco\\Desktop\\Visma\\ToDoAppBootCamp\\API\\API.csproj",
+      "packagesPath": "C:\\Users\\ladislav.kristofco\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\ladislav.kristofco\\Desktop\\Visma\\ToDoAppBootCamp\\API\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\adam.skrip\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\ladislav.kristofco\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net7.0"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -12074,6 +12076,12 @@
     }
   },
   "logs": [
+    {
+      "code": "Undefined",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Problem reading the cache file C:\\Users\\ladislav.kristofco\\Desktop\\Visma\\ToDoAppBootCamp\\API\\obj\\project.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
+    },
     {
       "code": "NU1603",
       "level": "Warning",
