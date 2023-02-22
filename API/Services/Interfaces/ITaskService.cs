@@ -5,9 +5,9 @@ namespace API.Services.Interfaces;
 
 public interface ITaskService
 {
-    Task<List<QuestDto>> GetAllAsync(CancellationToken ct = default);
+    Task<List<QuestModel>> GetAllAsync(CancellationToken ct = default);
     
     Task<QuestDto> GetAsync(Guid? taskId ,CancellationToken ct = default);
     
-    Task<QuestDto> CreateAsync(QuestDto dto,CancellationToken ct = default);
+    Task<QuestModel> CreateAsync(QuestDto dto,CancellationToken ct = default);
 }

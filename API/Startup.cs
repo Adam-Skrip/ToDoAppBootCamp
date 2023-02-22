@@ -72,6 +72,8 @@ public class Startup
 
         app.UseCors("CorsPolicy");
 
+        app.UseAuthentication();
+
         app.UseAuthorization();
 
         // use custom middlewares here
