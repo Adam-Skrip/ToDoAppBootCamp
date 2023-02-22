@@ -1,25 +1,31 @@
-
-      <div class="modal-body">
-        <mat-form-field appearance="fill">
-          <mat-label class="m-label">Username</mat-label>
-          <input matInput  name="username">
-
-        </mat-form-field>
-        <mat-form-field appearance="fill">
-          <mat-label>Password</mat-label>
-          <input matInput  name="password" [type]="hide ? 'password' : 'text'">
-          <i class="bi bi-lock-fill" matPrefix></i>
-          <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
-                  [attr.aria-pressed]="hide">
-<!--            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>-->
-          </button>
-        </mat-form-field>
-      </div>
-      <div class="modal-footer text-center">
-        <button class="btn-login" mat-raised-button color="primary" type="button" >Login</button>
-
-        <p class="w-100 mt-5">Need an account?
-        </p>
+<div class="login flex justify-center">
+  <div class="banner px-5 mx-5 flex flex-col justify-center">
+    <span class="text-5xl">LogIn</span>
+    <span class="text-5xl">To Account</span>
+  </div>
 
 
-      </div>
+  <div class="form flex flex-col w-80  ">
+    <mat-form-field appearance="fill">
+      <mat-label class="m-label" >Username</mat-label>
+      <i matPrefix class="bi bi-person-fill"></i>
+      <input matInput   [(ngModel)]="user.username" name="#username">
+
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Password</mat-label>
+      <input matInput  [type]="hide ? 'password' : 'text'" [(ngModel)]="user.password" name="#password">
+      <i class="bi bi-lock-fill" matPrefix></i>
+      <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+              [attr.aria-pressed]="hide">
+        <!--            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>-->
+      </button>
+    </mat-form-field>
+
+    <div class="modal-footer text-center">
+      <button class="btn-login" mat-raised-button color="primary" type="button" (click)="login(user)">Login</button>
+      <p class="w-100 mt-5"><a routerLink="/register">Need an account?</a></p>
+    </div>
+  </div>
+
+</div>
