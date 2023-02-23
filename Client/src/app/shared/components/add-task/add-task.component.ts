@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {DashboardService} from "../../../dashboard/dashboard.service";
 import {ITask} from "../../models/task/ITask";
 
@@ -8,6 +8,7 @@ import {ITask} from "../../models/task/ITask";
   styleUrls: ['./add-task.component.css']
 })
 export class AddTaskComponent {
+  @Input("idInput") publicId! : string;
   taskTitle: string = "";
   constructor(private ds : DashboardService) {
   }
@@ -15,10 +16,9 @@ export class AddTaskComponent {
   addTask() {
     let newTask = {} as ITask;
     newTask.title = this.taskTitle;
-    this.ds.addTask(newTask).subscribe(() => {
-
-      }
-    );
+    newTask.description = "";
+    newTask.publicId = this.publicId;
+    this.ds.addTask(newTask).subscribe();
 
   }
 

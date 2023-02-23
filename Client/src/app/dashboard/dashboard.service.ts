@@ -5,13 +5,15 @@ import {ITask} from "../shared/models/task/ITask";
 import {ITaskResult} from "../shared/models/task/ITaskResult";
 import {IListResult} from "../shared/models/list/IListResult";
 import {IList} from "../shared/models/list/IList";
-import {ReplaySubject} from "rxjs";
+import {Observable, ReplaySubject} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
 export class DashboardService {
   token! : string;
+
+  newList = {} as IList;
   baseUrl = "https://localhost:5001/api/";
 
 
@@ -32,7 +34,7 @@ export class DashboardService {
 
 
   addTask(task: ITask){
-    return this.http.post(this.baseUrl+"task/new", task);
+    return this.http.post(this.baseUrl+"task/new", task,this.httpOptions);
 
   }
 
@@ -51,14 +53,18 @@ export class DashboardService {
   }
 
   getNewListName(list: IList){
+    this.newList = list;
     console.log(list)
   }
 
 
-  getAllLists(){
+  getAllLists() : Observable<IListResult[]>{
     return this.http.get<IListResult[]>(this.baseUrl+"basket", this.httpOptions);
   }
 
+  deleteList(id: string){
+    return this.http.delete(this.baseUrl+"basket/remove?publicId="+ id, this.httpOptionsDelete);
+  }
 
   getToken() : string{
     let tempToken = localStorage.getItem('token');
@@ -73,6 +79,12 @@ export class DashboardService {
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
+      'Authorization': "Bearer "+this.getToken() })
+  };
+
+  httpOptionsDelete = {
+    headers: new HttpHeaders({
+      'Content-Type': 'text/plain',
       'Authorization': "Bearer "+this.getToken() })
   };
 }
