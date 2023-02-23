@@ -33,8 +33,8 @@ export class DashboardService {
 
 
 
-  addTask(task: ITask){
-    return this.http.post(this.baseUrl+"task/new", task,this.httpOptions);
+  addTask(task: ITask, basketId : string){
+    return this.http.post(this.baseUrl+"task/new/?basketId="+basketId, task,this.httpOptions);
 
   }
 

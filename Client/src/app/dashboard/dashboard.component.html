@@ -1,27 +1,29 @@
-<div class="dashboard flex align-middle flex-wrap ">
+<div class="dashboard flex align-middle flex-wrap">
 
-<!--  <div class="add-list flex items-center justify-center" >-->
-<!--    <i (click)="addList()" class="bi bi-file-earmark-plus"></i>-->
-<!--    <div class="text-3xl h-fit mx-5">Add a new list</div>-->
-<!--  </div>-->
+  <!--  <div class="add-list flex items-center justify-center" >-->
+  <!--    <i (click)="addList()" class="bi bi-file-earmark-plus"></i>-->
+  <!--    <div class="text-3xl h-fit mx-5">Add a new list</div>-->
+  <!--  </div>-->
 
-<!--  <div class="task" *ngFor="let task of taskList">-->
-<!--    <app-task [taskInput]="task"></app-task>-->
-<!--  </div>-->
+  <!--  <div class="task" *ngFor="let task of taskList">-->
+  <!--    <app-task [taskInput]="task"></app-task>-->
+  <!--  </div>-->
 
-<div class="task-list py-2 px-3" *ngFor="let list of lists">
-  <div class="flex justify-between align-middle list-title"><span class="text-2xl">{{list.name}}</span><i class="bi bi-x-lg remove" (click)="deleteList(list.publicId)"></i></div>
-  <div class="task" *ngFor="let task of list.quests">
-  <app-task [taskInput]="task"></app-task>
+  <div class="task-list py-2 px-3" *ngFor="let list of lists">
+    <div class="flex justify-between align-middle list-title"><span class="text-2xl px-3">{{list.name}}</span><i
+      class="bi bi-x-lg remove" (click)="deleteList(list.publicId)"></i></div>
+    <div class="flex justify-between flex-col list-content">
+      <mat-selection-list  class="task pb-2" *ngFor="let task of list.quests">
+        <mat-list-option [class.done] = "task.status === 'Done'" (click)="openTaskDetail(task)">{{task.title}}</mat-list-option>
+      </mat-selection-list>
+      <app-add-task [idInput]="list.publicId"></app-add-task>
+    </div>
   </div>
-  <app-add-task [idInput]="list.publicId"></app-add-task>
-</div>
 
   <div class="add-button flex flex-col justify-center items-center" (click)="openDialog()">
     <i class="bi bi-plus-lg w-fit"></i>
     <span class="text-3xl w-fit">Add list</span>
   </div>
-
 
 
 </div>

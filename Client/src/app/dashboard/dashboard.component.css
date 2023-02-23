@@ -1,41 +1,39 @@
-.dashboard{
+.dashboard {
   margin: 60px 30px;
   height: 100%;
 }
 
-.task-list{
+.task-list {
   margin-bottom: 30px;
   margin-right: 10px;
   margin-left: 10px;
-  width: calc((100%/4) - 20px);
+  width: calc((100% / 4) - 20px);
   min-height: 200px;
   border: 2px solid #EEEEEE;
   border-radius: 15px;
 }
 
 
-
-.add-list{
+.add-list {
   cursor: pointer;
   transition: transform .2s ease-out;
 
 }
 
-.add-list:hover{
+.add-list:hover {
   transform: scale(1.1);
   -ms-transform: scale(1.1);
 }
 
 
-
-.bi-file-earmark-plus{
+.bi-file-earmark-plus {
   cursor: pointer;
   font-size: 50px;
   color: #3E363F;
 }
 
 
-.add-button{
+.add-button {
   width: 186px;
   height: 186px;
   cursor: pointer;
@@ -43,26 +41,36 @@
   transition: transform .2s ease-out;
 }
 
-.add-button:hover{
+.add-button:hover {
   transform: scale(1.1);
 }
-.bi-plus-lg{
+
+.bi-plus-lg {
   font-size: 100px;
   color: #3E363F;
 }
 
 
-.remove{
+.remove {
   cursor: pointer;
   vertical-align: middle;
 }
 
-.remove:hover{
+.remove:hover {
   color: #F50057;
 }
 
-.list-title{
+.list-title {
   padding-bottom: 10px;
   margin-bottom: 15px;
   border-bottom: 1px solid #EEEEEE;
 }
+
+  ::ng-deep.mat-pseudo-checkbox {
+    display: none !important;
+  }
+
+
+  .done{
+    text-decoration: line-through;
+  }
