@@ -9,9 +9,7 @@ import {ITaskResult} from "../../models/task/ITaskResult";
 })
 export class TaskComponent {
   @Input("taskInput") task! : ITaskResult;
-  taskList = this._formBuilder.group({
-    task: false,
-  });
+
 
   constructor(private _formBuilder: FormBuilder) {
   }

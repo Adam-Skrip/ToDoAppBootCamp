@@ -4,6 +4,7 @@ import {ITaskResult} from "../shared/models/task/ITaskResult";
 import {IListResult} from "../shared/models/list/IListResult";
 import {AddListComponent} from "../shared/components/add-list/add-list.component";
 import {MatDialog} from "@angular/material/dialog";
+import {TaskDetailComponent} from "../shared/components/task-detail/task-detail.component";
 
 @Component({
   selector: 'app-dashboard',
@@ -34,6 +35,16 @@ export class DashboardComponent implements OnInit {
     })
   }
 
+  openTaskDetail(task: ITaskResult) {
+    const dialogRef = this.dialog.open(TaskDetailComponent, {
+      data : task
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result);
+    })
+
+  }
+
   getTasks() {
     this.taskList = [];
     this.dashService.getAllTasks().subscribe((response: ITaskResult[]) => {
@@ -50,6 +61,7 @@ export class DashboardComponent implements OnInit {
 
 
   getLists(){
+    this.lists = [];
     this.dashService.getAllLists().subscribe((response: IListResult[]) =>{
       for (let id = 0; id < response.length; id++){
         let data = {} as IListResult;
@@ -64,7 +76,11 @@ export class DashboardComponent implements OnInit {
   }
 
   deleteList(id: string) {
-    this.dashService.deleteList(id).subscribe()
+    this.dashService.deleteList(id).subscribe(() =>{
+      this.getLists();
+    })
 
   }
+
+
 }

@@ -8,7 +8,7 @@ import {ITask} from "../../models/task/ITask";
   styleUrls: ['./add-task.component.css']
 })
 export class AddTaskComponent {
-  @Input("idInput") publicId! : string;
+  @Input("idInput") basketId! : string;
   taskTitle: string = "";
   constructor(private ds : DashboardService) {
   }
@@ -17,8 +17,8 @@ export class AddTaskComponent {
     let newTask = {} as ITask;
     newTask.title = this.taskTitle;
     newTask.description = "";
-    newTask.publicId = this.publicId;
-    this.ds.addTask(newTask).subscribe();
+    newTask.status = "";
+    this.ds.addTask(newTask,this.basketId).subscribe();
 
   }
 
