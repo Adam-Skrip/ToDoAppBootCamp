@@ -1,5 +1,8 @@
-export interface IListResult{
-  id: string,
+
+import {ITaskResult} from "../task/ITaskResult";
+
+export interface IListResult {
   name: string,
-  userId: string,
+  quests: ITaskResult []
+
 }

@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {DashboardService} from "./dashboard.service";
 import {ITaskResult} from "../shared/models/task/ITaskResult";
 import {ITask} from "../shared/models/task/ITask";
+import {IListResult} from "../shared/models/list/IListResult";
 
 @Component({
   selector: 'app-dashboard',
@@ -11,6 +12,7 @@ import {ITask} from "../shared/models/task/ITask";
 export class DashboardComponent implements OnInit {
 
   taskList: ITaskResult [] = [];
+  lists: IListResult [] = [];
 
   public taskTitle: string = "";
   public taskDescription: string = "";
@@ -19,7 +21,7 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getTasks();
+    this.getLists()
   }
 
   getTasks() {
@@ -36,10 +38,8 @@ export class DashboardComponent implements OnInit {
   }
 
   addTask() {
-    console.log(this.taskTitle)
     let newTask = {} as ITask;
     newTask.title = this.taskTitle;
-    newTask.description = this.taskDescription;
     this.dashService.addTask(newTask).subscribe(() => {
         this.getTasks()
       }
@@ -47,7 +47,16 @@ export class DashboardComponent implements OnInit {
 
   }
 
-  addList() {
+  getLists(){
+    this.dashService.getAllLists().subscribe((response: IListResult[]) =>{
+      for (let id = 0; id < response.length; id++){
+        let data = {} as IListResult;
+        data.name = response[id].name;
+        data.quests = response[id].quests;
+        this.lists.push(data)
+      }
+    console.log(response)
+    })
 
   }
 }
