@@ -5,6 +5,7 @@ import {ITask} from "../shared/models/task/ITask";
 import {ITaskResult} from "../shared/models/task/ITaskResult";
 import {IListResult} from "../shared/models/list/IListResult";
 import {IList} from "../shared/models/list/IList";
+import {ReplaySubject} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,11 @@ export class DashboardService {
   baseUrl = "https://localhost:5001/api/";
 
 
+
   constructor(private http:HttpClient) { }
+
+
+
 
   getAllTasks() {
     return this.http.get<ITaskResult[]>(this.baseUrl+"task");
@@ -44,6 +49,11 @@ export class DashboardService {
     console.log(this.httpOptions)
     return this.http.post(this.baseUrl+"basket/new", list, this.httpOptions );
   }
+
+  getNewListName(list: IList){
+    console.log(list)
+  }
+
 
   getAllLists(){
     return this.http.get<IListResult[]>(this.baseUrl+"basket", this.httpOptions);
