@@ -13,8 +13,8 @@ public class QuestBasket
     public int UserId { get; set; }
     
     public User User { get; set; }
-    
-    public ICollection<Quest> Quests { get; set; }
+
+    public ICollection<Quest> Quests { get; set; } = new List<Quest>();
     
     public QuestBasketModel ToDto()
     {
