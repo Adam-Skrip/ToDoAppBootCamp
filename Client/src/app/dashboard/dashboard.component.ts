@@ -37,15 +37,7 @@ export class DashboardComponent implements OnInit {
     })
   }
 
-  addTask() {
-    let newTask = {} as ITask;
-    newTask.title = this.taskTitle;
-    this.dashService.addTask(newTask).subscribe(() => {
-        this.getTasks()
-      }
-    );
 
-  }
 
   getLists(){
     this.dashService.getAllLists().subscribe((response: IListResult[]) =>{
