@@ -27,23 +27,23 @@ public class BasketController : ControllerBase
         description: "Returns all baskets in the database",
         OperationId = "getAllBaskets",
         Tags = new[] { "Basket API" })]
-    public async Task<IActionResult> GetTasksAsync(CancellationToken ct)
+    public async Task<IActionResult> GetBasketsAsync(CancellationToken ct)
     {
         var user = HttpContext.User.Identity!.Name;
 
         List<QuestBasketModel> listOfBaskets = await _basketService.GetAllAsync(user, ct);
-        return Ok(listOfBaskets);
+        return StatusCode(StatusCodes.Status200OK, listOfBaskets);
     }
 
     [HttpPost("new")]
     [Authorize]
-    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(QuestBasketDto))]
+    [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(QuestBasketDto))]
     [SwaggerOperation(
         summary: "Create Basket",
         description: "Creates Basket in the database",
         OperationId = "createBasket",
         Tags = new[] { "Basket API" })]
-    public async Task<IActionResult> CreateTask
+    public async Task<IActionResult> CreateBasket
         (QuestBasketDto basketDto, CancellationToken ct)
     {
         var user = HttpContext.User.Identity!.Name;
@@ -60,12 +60,12 @@ public class BasketController : ControllerBase
         description: "Returns basket from the database",
         OperationId = "getOneBasket",
         Tags = new[] { "Basket API" })]
-    public async Task<IActionResult> GetTaskAsync(Guid publicId, CancellationToken ct)
+    public async Task<IActionResult> getBasketAsync(Guid publicId, CancellationToken ct)
     {
         var user = HttpContext.User.Identity!.Name;
 
         QuestBasketModel qBasket = await _basketService.GetAsync(user, publicId, ct);
-        return Ok(qBasket);
+        return StatusCode(StatusCodes.Status200OK, qBasket);
     }
 
     [HttpDelete("remove")]
@@ -81,7 +81,7 @@ public class BasketController : ControllerBase
         var user = HttpContext.User.Identity!.Name;
 
         await _basketService.DeleteAsync(user, publicId, ct);
-        return NoContent();
+        return StatusCode(StatusCodes.Status200OK);
     }
 
     [HttpPut("update")]
@@ -97,6 +97,6 @@ public class BasketController : ControllerBase
         var user = HttpContext.User.Identity!.Name;
 
         QuestBasketModel qBasket = await _basketService.UpdateAsync(user, newBasket, publicId, ct);
-        return Ok(qBasket);
+        return StatusCode(StatusCodes.Status200OK, qBasket);
     }
 }
