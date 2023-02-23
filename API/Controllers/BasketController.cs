@@ -60,15 +60,15 @@ public class BasketController : ControllerBase
         description: "Returns basket from the database",
         OperationId = "getOneBasket",
         Tags = new[] { "Basket API" })]
-    public async Task<IActionResult> GetTaskAsync(string basket, CancellationToken ct)
+    public async Task<IActionResult> GetTaskAsync(Guid publicId, CancellationToken ct)
     {
         var user = HttpContext.User.Identity!.Name;
 
-        QuestBasketModel qBasket = await _basketService.GetAsync(user, basket, ct);
+        QuestBasketModel qBasket = await _basketService.GetAsync(user, publicId, ct);
         return Ok(qBasket);
     }
 
-    [HttpGet("remove")]
+    [HttpDelete("remove")]
     [Authorize]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(QuestBasketDto))]
     [SwaggerOperation(
@@ -76,15 +76,15 @@ public class BasketController : ControllerBase
         description: "Deletes basket from the database",
         OperationId = "deleteOneBasket",
         Tags = new[] { "Basket API" })]
-    public async Task<IActionResult> DeleteBasketAsync(string basket, CancellationToken ct)
+    public async Task<IActionResult> DeleteBasketAsync(Guid publicId, CancellationToken ct)
     {
         var user = HttpContext.User.Identity!.Name;
 
-        await _basketService.DeleteAsync(user, basket, ct);
+        await _basketService.DeleteAsync(user, publicId, ct);
         return NoContent();
     }
 
-    [HttpGet("update")]
+    [HttpPut("update")]
     [Authorize]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(QuestBasketDto))]
     [SwaggerOperation(
@@ -92,11 +92,11 @@ public class BasketController : ControllerBase
         description: "Update basket name in the database",
         OperationId = "UpdateOneBasket",
         Tags = new[] { "Basket API" })]
-    public async Task<IActionResult> UpdateBasketName(string oldBasket, string newBasket, CancellationToken ct)
+    public async Task<IActionResult> UpdateBasketName(Guid publicId, string newBasket, CancellationToken ct)
     {
         var user = HttpContext.User.Identity!.Name;
 
-        QuestBasketModel qBasket = await _basketService.UpdateAsync(user, newBasket, oldBasket, ct);
+        QuestBasketModel qBasket = await _basketService.UpdateAsync(user, newBasket, publicId, ct);
         return Ok(qBasket);
     }
 }

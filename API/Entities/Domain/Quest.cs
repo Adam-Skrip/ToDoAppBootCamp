@@ -33,6 +33,7 @@ public class Quest
     {
         return new QuestModel
         {
+            PublicId = PublicId,
             Title = Title,
             Description = Description,
             CreatedAt = CreatedAt,
