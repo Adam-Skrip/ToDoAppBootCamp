@@ -44,6 +44,7 @@ public class BasketService : IBasketService
 
         var questBasket = new QuestBasket
         {
+            PublicId = Guid.NewGuid(),
             name = basket.name,
             UserId = user.Id
         };
@@ -54,7 +55,7 @@ public class BasketService : IBasketService
         return questBasket.ToDto();
     }
 
-    public async Task<QuestBasketModel> GetAsync(string username, string basket, CancellationToken ct)
+    public async Task<QuestBasketModel> GetAsync(string username, Guid publicId, CancellationToken ct)
     {
         var user = await _context.Users.AsNoTracking().SingleOrDefaultAsync(u => u.Username == username);
 
@@ -63,7 +64,7 @@ public class BasketService : IBasketService
             throw new Exception("User doesnt exist!");
         }
 
-        if (basket == null)
+        if (publicId == null)
         {
             throw new Exception("Basket is not provided!");
         }
@@ -72,18 +73,18 @@ public class BasketService : IBasketService
             .AsNoTracking()
             .Include(q => q.Quests)
             .Where(u => u.UserId == user.Id)
-            .SingleOrDefaultAsync(b => b.name == basket, ct);
+            .SingleOrDefaultAsync(b => b.PublicId == publicId, ct);
 
         if (Qbasket == null)
         {
-            throw new Exception($"Basket with name: {basket} does not exist!");
+            throw new Exception($"Basket with Id: {publicId} does not exist!");
         }
 
         var questModel = Qbasket.ToDto();
         return questModel;
     }
 
-    public async Task<QuestBasketModel> UpdateAsync(string username,string newBasket, string oldBasket, CancellationToken ct)
+    public async Task<QuestBasketModel> UpdateAsync(string username,string newBasket, Guid publicId, CancellationToken ct)
     {
         var user = await _context.Users.AsNoTracking().SingleOrDefaultAsync(u => u.Username == username);
 
@@ -92,7 +93,7 @@ public class BasketService : IBasketService
             throw new Exception("User doesnt exist!");
         }
 
-        if (oldBasket == null)
+        if (publicId == null)
         {
             throw new Exception("Basket is not provided!");
         }
@@ -103,11 +104,11 @@ public class BasketService : IBasketService
         }
         
         QuestBasket Qbasket = await _context.Baskets
-            .AsNoTracking().SingleOrDefaultAsync(b => b.name == oldBasket, ct);
+            .AsNoTracking().SingleOrDefaultAsync(b => b.PublicId == publicId, ct);
 
         if (Qbasket == null)
         {
-            throw new Exception($"Basket with name: {oldBasket} does not exist!");
+            throw new Exception($"Basket with Id: {publicId} does not exist!");
         }
         
         Qbasket.name = newBasket;
@@ -119,7 +120,7 @@ public class BasketService : IBasketService
 
     }
 
-    public async Task DeleteAsync(string username, string basket, CancellationToken ct)
+    public async Task DeleteAsync(string username, Guid publicId, CancellationToken ct)
     {
         var user = await _context.Users.AsNoTracking().SingleOrDefaultAsync(u => u.Username == username);
 
@@ -128,7 +129,7 @@ public class BasketService : IBasketService
             throw new Exception("User doesnt exist!");
         }
         
-        if (basket == null)
+        if (publicId == null)
         {
             throw new Exception("Basket is not provided!");
         }
@@ -137,11 +138,11 @@ public class BasketService : IBasketService
             .AsNoTracking()
             .Include(q => q.Quests)
             .Where(u => u.UserId == user.Id)
-            .SingleOrDefaultAsync(b => b.name == basket, ct);
+            .SingleOrDefaultAsync(b => b.PublicId == publicId, ct);
         
         if (basketFound == null)
         {
-            throw new Exception($"Basket with name: {basket} does not exist!");
+            throw new Exception($"Basket with Id: {publicId} does not exist!");
         }
 
         _context.Baskets.Remove(basketFound);

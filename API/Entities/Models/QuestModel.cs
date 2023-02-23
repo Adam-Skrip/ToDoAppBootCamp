@@ -5,6 +5,7 @@ namespace API.Entities.Models;
 
 public class QuestModel
 {
+    public Guid? PublicId { get; set; }
     [Required, StringLength(30)] public string Title { get; set; }
 
     [StringLength(1024)] public string Description { get; set; }
