@@ -7,7 +7,6 @@ using Swashbuckle.AspNetCore.Annotations;
 
 namespace API.Controllers;
 
-
 [Route("api/[controller]")]
 [ApiController]
 public class BasketController : ControllerBase
@@ -18,8 +17,8 @@ public class BasketController : ControllerBase
     {
         _basketService = basketService;
     }
-    
-    
+
+
     [HttpGet]
     [Authorize]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(QuestBasketDto))]
@@ -35,7 +34,7 @@ public class BasketController : ControllerBase
         List<QuestBasketModel> listOfBaskets = await _basketService.GetAllAsync(user, ct);
         return Ok(listOfBaskets);
     }
-    
+
     [HttpPost("new")]
     [Authorize]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(QuestBasketDto))]
@@ -53,4 +52,51 @@ public class BasketController : ControllerBase
         return StatusCode(StatusCodes.Status201Created, dto);
     }
 
+    [HttpGet("name")]
+    [Authorize]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(QuestBasketDto))]
+    [SwaggerOperation(
+        summary: "Retrieve One Basket",
+        description: "Returns basket from the database",
+        OperationId = "getOneBasket",
+        Tags = new[] { "Basket API" })]
+    public async Task<IActionResult> GetTaskAsync(string basket, CancellationToken ct)
+    {
+        var user = HttpContext.User.Identity!.Name;
+
+        QuestBasketModel qBasket = await _basketService.GetAsync(user, basket, ct);
+        return Ok(qBasket);
+    }
+
+    [HttpGet("remove")]
+    [Authorize]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(QuestBasketDto))]
+    [SwaggerOperation(
+        summary: "Delete One Basket",
+        description: "Deletes basket from the database",
+        OperationId = "deleteOneBasket",
+        Tags = new[] { "Basket API" })]
+    public async Task<IActionResult> DeleteBasketAsync(string basket, CancellationToken ct)
+    {
+        var user = HttpContext.User.Identity!.Name;
+
+        await _basketService.DeleteAsync(user, basket, ct);
+        return NoContent();
+    }
+
+    [HttpGet("update")]
+    [Authorize]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(QuestBasketDto))]
+    [SwaggerOperation(
+        summary: "Update Basket Name",
+        description: "Update basket name in the database",
+        OperationId = "UpdateOneBasket",
+        Tags = new[] { "Basket API" })]
+    public async Task<IActionResult> UpdateBasketName(string oldBasket, string newBasket, CancellationToken ct)
+    {
+        var user = HttpContext.User.Identity!.Name;
+
+        QuestBasketModel qBasket = await _basketService.UpdateAsync(user, newBasket, oldBasket, ct);
+        return Ok(qBasket);
+    }
 }
