@@ -5,5 +5,5 @@ public class QuestDto
     public string Title { get; set; }
     public string Description { get; set; }
 
-    public Guid? PublicId { get; set; }
+    public string Status { get; set; }
 }
