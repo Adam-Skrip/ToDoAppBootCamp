@@ -6,6 +6,7 @@ import {IUserRegister} from "../shared/models/IUserRegister";
 import {catchError, EMPTY, map, Observable, ReplaySubject} from "rxjs";
 import {Router} from "@angular/router";
 import {MessageService} from "../shared/snackbar/message.service";
+import {IList} from "../shared/models/list/IList";
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +15,8 @@ export class AccountService {
 
   private currentUserSource = new ReplaySubject<IUser | null>(1);
   currentUser$ = this.currentUserSource.asObservable();
+
+
 
   baseUrl =" https://localhost:5001/api/auth/";
 
@@ -58,6 +61,7 @@ export class AccountService {
       this.currentUserSource.next(null)
     }
   }
+
 
   processError(error:any): Observable<never> {
     if (error instanceof HttpErrorResponse) {
