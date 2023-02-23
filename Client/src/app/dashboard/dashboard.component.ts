@@ -3,6 +3,8 @@ import {DashboardService} from "./dashboard.service";
 import {ITaskResult} from "../shared/models/task/ITaskResult";
 import {ITask} from "../shared/models/task/ITask";
 import {IListResult} from "../shared/models/list/IListResult";
+import {AddListComponent} from "../shared/components/add-list/add-list.component";
+import {MatDialog} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-dashboard',
@@ -17,11 +19,18 @@ export class DashboardComponent implements OnInit {
   public taskTitle: string = "";
   public taskDescription: string = "";
 
-  constructor(private dashService: DashboardService) {
+  constructor(private dashService: DashboardService, public dialog: MatDialog) {
   }
 
   ngOnInit(): void {
     this.getLists()
+  }
+
+  openDialog(){
+    const dialogRef = this.dialog.open(AddListComponent);
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result);
+    })
   }
 
   getTasks() {

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, EventEmitter, Output} from '@angular/core';
 import {DashboardService} from "../../../dashboard/dashboard.service";
 import {IList} from "../../models/list/IList";
 
@@ -13,6 +13,8 @@ export class AddListComponent {
   constructor(private dashboardService: DashboardService) {
   }
   onSubmit(list : IList) {
-    this.dashboardService.addList(list).subscribe();
+    if(list){
+      this.dashboardService.getNewListName(list)
+    }
   }
 }
