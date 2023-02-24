@@ -10,3 +10,6 @@ body{
 }
 
 
+.mdc-checkbox {
+  display: none !important;
+}

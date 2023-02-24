@@ -1,6 +1,14 @@
-<div class="text-4xl" mat-dialog-title>{{data.title}}</div>
-<mat-dialog-content class="mat-typography">
-  <h3>{{data.description}}</h3>
+<span matDialogTitle>{{date}}</span>
+<mat-dialog-content>
+  <textarea class="title" name="title" [(ngModel)]="data.title" placeholder="Task Name"></textarea>
+
+  <span>Status: {{data.status}}</span>
+  <div class="description mt-10">
+    <div class="description-title  mb-4">Description</div>
+    <textarea  class="description-content" name="description" [(ngModel)]="data.description" placeholder="Add detail description..." ></textarea>
+
+  </div>
+
 </mat-dialog-content>
 <mat-dialog-actions align="end">
   <button mat-button mat-dialog-close>Cancel</button>
