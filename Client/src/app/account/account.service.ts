@@ -18,7 +18,7 @@ export class AccountService {
 
 
 
-  baseUrl =" https://localhost:5001/api/auth/";
+  baseUrl = environment.apiUrl+ 'auth/';
 
   constructor(private http: HttpClient, private router: Router, private messageService: MessageService) { }
 
@@ -29,6 +29,7 @@ export class AccountService {
         this.setToken(response, user);
       }),
       catchError(err => this.processError(err))
+
     )
   }
 
