@@ -45,5 +45,6 @@
         <PackageReference Include="System.Threading.Tasks" Version="4.3.0" />
         <PackageReference Include="Warappa.Microsoft.Extensions.DependencyInjection.ServiceCollectionModule" Version="1.0.0" />
     </ItemGroup>
+    
 
 </Project>

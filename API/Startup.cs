@@ -24,7 +24,7 @@ public class Startup
             options.AddPolicy(name: "CorsPolicy",
                 builder =>
                 {
-                    builder.WithOrigins("https://localhost:4200", "http://localhost:4200", "https://localhost:5001","http://localhost:5000" )
+                    builder.WithOrigins("https://localhost:4200", "http://localhost:4200", "https://localhost:5001","http://localhost:5000", "https://questapihackaton.azurewebsites.net" )
                         .AllowAnyHeader()
                         .AllowAnyMethod();
                 });
@@ -48,11 +48,7 @@ public class Startup
                 Version = "1.0.0"
             });
             c.EnableAnnotations();
-            c.AddServer(new OpenApiServer
-            {
-                Description = "Development localhost server - Kestrel",
-                Url = "https://localhost:5001"
-            });
+            
             var securitySchema = new OpenApiSecurityScheme()
             {
                 Description = "JWT Auth Bearer Scheme",
@@ -98,12 +94,12 @@ public class Startup
 
     public void Configure(IApplicationBuilder app)
     {
-        if (Environment.IsDevelopment())
-        {
+        // if (Environment.IsDevelopment())
+        // {
             app.UseDeveloperExceptionPage();
             app.UseSwagger();
             app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Visma.TaskHackaton"));
-        }
+        // }
 
         app.UseHttpsRedirection();
 
