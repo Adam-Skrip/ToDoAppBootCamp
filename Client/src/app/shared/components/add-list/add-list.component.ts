@@ -14,7 +14,8 @@ export class AddListComponent {
   }
   onSubmit(list : IList) {
     if(list){
-      this.dashboardService.getNewListName(list)
+      this.dashboardService.addList(list).subscribe()
+
     }
   }
 }

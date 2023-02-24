@@ -5,6 +5,7 @@ import {MaterialModule} from "./modules/material.module";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { AddTaskComponent } from './components/add-task/add-task.component';
 import { AddListComponent } from './components/add-list/add-list.component';
+import { TaskDetailComponent } from './components/task-detail/task-detail.component';
 
 
 
@@ -13,6 +14,7 @@ import { AddListComponent } from './components/add-list/add-list.component';
     TaskComponent,
     AddTaskComponent,
     AddListComponent,
+    TaskDetailComponent,
   ],
   imports: [
     CommonModule,
