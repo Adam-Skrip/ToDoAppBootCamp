@@ -37,7 +37,7 @@ export class DashboardComponent implements OnInit {
   openTaskDetail(task: ITaskResult) {
     const dialogRef = this.dialog.open(TaskDetailComponent, {
       height: '500px',
-      width: '400px',
+      width: '450px',
       data : task
     });
     dialogRef.afterClosed().subscribe()

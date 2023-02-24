@@ -4,7 +4,8 @@
       class="bi bi-x-lg remove" (click)="deleteList(list.publicId)"></i></div>
     <div class="flex justify-between flex-col list-content">
       <mat-selection-list class="task" *ngFor="let task of list.quests">
-        <mat-list-option [class.done] = "task.status === 'Done'" (click)="openTaskDetail(task)">{{task.title}}</mat-list-option>
+        <mat-list-option [class.done]="task.status === 'Done'"
+                         (click)="openTaskDetail(task)">{{task.title}}</mat-list-option>
       </mat-selection-list>
       <app-add-task [idInput]="list.publicId"></app-add-task>
     </div>

@@ -1,8 +1,17 @@
-<span matDialogTitle>{{date}}</span>
+<div matDialogTitle class="dialog-header"><span class="date">{{date}}</span>
+  <i class="bi bi-x-lg close" matDialogClose></i>
+
+</div>
 <mat-dialog-content>
   <textarea class="title" name="title" [(ngModel)]="data.title" placeholder="Task Name"></textarea>
+  <div class="status">
+    <i *ngIf="data.status === 'Not Assigned'" class="bi bi-clock-history not"></i>
+    <i *ngIf="data.status === 'Done'" class="bi bi-check2-circle done"></i>
+    <i *ngIf="data.status === 'In Progress'" class="bi bi-clock-history progress"></i>
+    {{data.status}}
 
-  <span>Status: {{data.status}}</span>
+  </div>
+
   <div class="description mt-10">
     <div class="description-title  mb-4">Description</div>
     <textarea  class="description-content" name="description" [(ngModel)]="data.description" placeholder="Add detail description..." ></textarea>
@@ -10,8 +19,4 @@
   </div>
 
 </mat-dialog-content>
-<mat-dialog-actions align="end">
-  <button mat-button mat-dialog-close>Cancel</button>
-  <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Save</button>
-</mat-dialog-actions>
 
