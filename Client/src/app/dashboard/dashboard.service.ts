@@ -14,7 +14,7 @@ export class DashboardService {
   token! : string;
 
   newList = {} as IList;
-  baseUrl = "https://localhost:5001/api/";
+  baseUrl = environment.apiUrl;
 
 
 
