@@ -5,6 +5,7 @@ import {IListResult} from "../shared/models/list/IListResult";
 import {AddListComponent} from "../shared/components/add-list/add-list.component";
 import {MatDialog} from "@angular/material/dialog";
 import {TaskDetailComponent} from "../shared/components/task-detail/task-detail.component";
+import {MessageService} from "../shared/snackbar/message.service";
 
 @Component({
   selector: 'app-dashboard',
@@ -19,7 +20,7 @@ export class DashboardComponent implements OnInit {
   public taskTitle: string = "";
   public taskDescription: string = "";
 
-  constructor(private dashService: DashboardService, public dialog: MatDialog) {
+  constructor(private dashService: DashboardService, private messageService: MessageService, public dialog: MatDialog) {
   }
 
 
@@ -30,46 +31,32 @@ export class DashboardComponent implements OnInit {
 
   openDialog(){
     const dialogRef = this.dialog.open(AddListComponent);
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
-    })
+    dialogRef.afterClosed().subscribe()
   }
 
   openTaskDetail(task: ITaskResult) {
     const dialogRef = this.dialog.open(TaskDetailComponent, {
+      height: '500px',
+      width: '400px',
       data : task
     });
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
-    })
+    dialogRef.afterClosed().subscribe()
 
-  }
-
-  getTasks() {
-    this.taskList = [];
-    this.dashService.getAllTasks().subscribe((response: ITaskResult[]) => {
-      for (let id = 0; id < response.length; id++) {
-        let data = {} as ITaskResult;
-        data.title = response[id].title;
-        data.description = response[id].description;
-        this.taskList.push(data);
-      }
-      console.log(response);
-    })
   }
 
 
 
   getLists(){
-    this.lists = [];
+
     this.dashService.getAllLists().subscribe((response: IListResult[]) =>{
-      for (let id = 0; id < response.length; id++){
-        let data = {} as IListResult;
-        data.publicId = response[id].publicId;
-        data.name = response[id].name;
-        data.quests = response[id].quests;
-        this.lists.push(data)
-      }
+      // for (let id = 0; id < response.length; id++){
+      //   let data = {} as IListResult;
+      //   data.publicId = response[id].publicId;
+      //   data.name = response[id].name;
+      //   data.quests = response[id].quests;
+      //   this.lists.push(data)
+      //}
+      this.lists = response;
     console.log(response)
     })
 
@@ -78,6 +65,8 @@ export class DashboardComponent implements OnInit {
   deleteList(id: string) {
     this.dashService.deleteList(id).subscribe(() =>{
       this.getLists();
+      this.messageService.successMessage("List was deleted")
+
     })
 
   }
