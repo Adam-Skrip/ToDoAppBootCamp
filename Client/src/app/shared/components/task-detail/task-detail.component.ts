@@ -38,6 +38,10 @@ export class TaskDetailComponent implements OnInit {
     this.dashboradService.updateTask(id,task).subscribe(()=>{
       this.dialogRef.close();
     });
+  }
+
+  onChangeStatus($event : any){
+    this.data.status = $event.target.value;
 
   }
 }

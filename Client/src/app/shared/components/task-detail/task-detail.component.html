@@ -8,7 +8,12 @@
     <i *ngIf="data.status === 'Not Assigned'" class="bi bi-clock-history not"></i>
     <i *ngIf="data.status === 'Done'" class="bi bi-check2-circle done"></i>
     <i *ngIf="data.status === 'In Progress'" class="bi bi-clock-history progress"></i>
-    {{data.status}}
+    <select name="status" class="status-select" [ngModel]="data.status" (change)="onChangeStatus($event)">
+      <option value="Not Assigned">Not Assigned</option>
+      <option value="In Progress">In Progress</option>
+      <option value="Done">Done</option>
+    </select>
+
 
   </div>
 
