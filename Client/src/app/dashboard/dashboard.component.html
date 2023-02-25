@@ -1,19 +1,21 @@
-<div class="dashboard flex align-middle flex-wrap">
+<div class="dashboard flex align-middle flex-wrap" >
+
   <div class="task-list py-2 px-3" *ngFor="let list of lists">
     <div class="flex justify-between align-middle list-title">
       <input class="text-2xl px-3 list-input" (focusout)="updateList($event)" (focusin)="getListId(list.publicId)" name="listName" [(ngModel)]="list.name">
-      <i class="bi bi-x-lg remove" (click)="deleteList(list.publicId)"></i>
+      <i class="bi bi-x-lg remove" (click)="deleteList(list.publicId)" matTooltip="Remove list" ></i>
     </div>
     <div class="flex justify-between flex-col list-content">
       <mat-selection-list class="task" *ngFor="let task of list.quests">
-        <mat-list-option [class.done]="task.status === 'Done'"
-                         (click)="openTaskDetail(task)">{{task.title}}</mat-list-option>
+        <mat-list-option [class.done]="task.status === 'Done'" (click)="openTaskDetail(task)">
+          {{task.title}}<i *ngIf="task.description!==''" class="px-2 bi bi-text-left"></i>
+        </mat-list-option>
       </mat-selection-list>
       <app-add-task [idInput]="list.publicId"></app-add-task>
     </div>
   </div>
 
-  <div class="add-button flex flex-col justify-center items-center my-auto" (click)="openDialog()">
+  <div class="add-button flex flex-col justify-center items-center my-auto mx-32" (click)="openDialog()">
     <i class="bi bi-plus-lg w-fit"></i>
     <span class="text-3xl w-fit">Add list</span>
   </div>

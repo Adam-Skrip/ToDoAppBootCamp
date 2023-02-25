@@ -16,16 +16,26 @@ export class DashboardComponent implements OnInit {
 
   lists: IListResult [] = [];
   listId: string = "";
-  constructor(private dashService: DashboardService, private messageService: MessageService, public dialog: MatDialog) {
+
+  constructor(public dashService: DashboardService, private messageService: MessageService, public dialog: MatDialog) {
   }
 
   ngOnInit(): void {
-    this.getLists()
+    this.getLists();
+    this.dashService.isAdded.subscribe((response)=>{
+      if (response){
+        this.getLists();
+      }
+    })
+
   }
+
 
   openDialog(){
     const dialogRef = this.dialog.open(AddListComponent);
-    dialogRef.afterClosed().subscribe()
+    dialogRef.afterClosed().subscribe(()=>{
+      this.getLists();
+    })
   }
 
   openTaskDetail(task: ITaskResult) {
@@ -44,15 +54,8 @@ export class DashboardComponent implements OnInit {
 
   getLists(){
     this.dashService.getAllLists().subscribe((response: IListResult[]) =>{
-      // for (let id = 0; id < response.length; id++){
-      //   let data = {} as IListResult;
-      //   data.publicId = response[id].publicId;
-      //   data.name = response[id].name;
-      //   data.quests = response[id].quests;
-      //   this.lists.push(data)
-      //}
       this.lists = response;
-    console.log(response)
+      this.dashService.isAdded.next(false);
     })
   }
 
@@ -74,4 +77,6 @@ export class DashboardComponent implements OnInit {
       this.getLists();
     })
   }
+
+
 }
