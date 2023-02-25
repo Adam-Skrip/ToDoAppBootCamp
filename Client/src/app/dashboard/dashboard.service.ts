@@ -58,7 +58,7 @@ export class DashboardService {
   }
 
   updateList(id:string, name:string){
-    return this.http.put<IListResult>(this.baseUrl+"basket/update?publicId="+id+"&newBasket="+name,this.httpOptions)
+    return this.http.put<IListResult>(this.baseUrl+"basket/update?publicId="+id+"&newBasket="+name,null,this.httpOptions)
   }
   deleteList(id: string){
     return this.http.delete(this.baseUrl+"basket/remove?publicId="+ id, this.httpOptionsDelete);
