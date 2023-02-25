@@ -14,4 +14,7 @@ public interface IBasketService
     Task<QuestBasketModel> UpdateAsync(string username, string newBasket, Guid publicId, CancellationToken ct);
 
     Task DeleteAsync(string username, Guid publicId, CancellationToken ct);
+
+    Task<QuestModel> MigrateTask(string username, Guid oldBasketId, Guid newBasketId, Guid questId,
+        CancellationToken ct);
 }

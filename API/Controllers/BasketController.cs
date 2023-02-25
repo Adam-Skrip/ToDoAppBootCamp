@@ -99,4 +99,20 @@ public class BasketController : ControllerBase
         QuestBasketModel qBasket = await _basketService.UpdateAsync(user, newBasket, publicId, ct);
         return StatusCode(StatusCodes.Status200OK, qBasket);
     }
+    
+    [HttpPut("migrate")]
+    [Authorize]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [SwaggerOperation(
+        summary: "Migrate task to another basket",
+        description: "Migrate task to another basket in the database",
+        OperationId = "MigrateOneTask",
+        Tags = new[] { "Basket API" })]
+    public async Task<IActionResult> MigrateTask(Guid oldBasketId, Guid newBasketId, Guid questId, CancellationToken ct)
+    {
+        var user = HttpContext.User.Identity!.Name;
+
+        QuestModel qBasket = await _basketService.MigrateTask(user, oldBasketId,newBasketId,questId, ct);
+        return StatusCode(StatusCodes.Status200OK, qBasket);
+    }
 }

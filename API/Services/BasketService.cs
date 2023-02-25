@@ -148,4 +148,48 @@ public class BasketService : IBasketService
         _context.Baskets.Remove(basketFound);
         await _context.SaveChangesAsync(ct);
     }
+
+    public async Task<QuestModel> MigrateTask(string username, Guid oldBasketId, Guid newBasketId, Guid questId, CancellationToken ct)
+    {
+        var user = await _context.Users.AsNoTracking().SingleOrDefaultAsync(u => u.Username == username);
+
+        if (user == null)
+        {
+            throw new Exception("User doesnt exist!");
+        }
+
+        var findBasket = await _context.Baskets.SingleOrDefaultAsync(x => x.PublicId == newBasketId, ct);
+
+        if (findBasket == null)
+        {
+            throw new Exception($"Basket with Id:{newBasketId} does not exists!");
+        }
+        
+        Quest findQuest = await _context.Quests
+            .AsNoTracking()
+            .SingleOrDefaultAsync(q => q.PublicId == questId, ct);
+
+        if (findQuest == null)
+        {
+            throw new Exception($"Quest with Id: {questId} does not exists!");
+        }
+
+        var migrate = new Quest
+        {
+            PublicId = Guid.NewGuid(),
+            Title = findQuest.Title,
+            Description = findQuest.Description,
+            CreatedAt = findQuest.CreatedAt,
+            Status = findQuest.Status,
+            BasketId = findBasket.id
+        };
+
+
+        await _context.Quests.AddAsync(migrate, ct);
+        _context.Quests.Remove(findQuest);
+        await _context.SaveChangesAsync(ct);
+        
+        return migrate.ToDto();
+        
+    }
 }
