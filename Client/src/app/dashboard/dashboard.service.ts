@@ -5,7 +5,7 @@ import {ITask} from "../shared/models/task/ITask";
 import {ITaskResult} from "../shared/models/task/ITaskResult";
 import {IListResult} from "../shared/models/list/IListResult";
 import {IList} from "../shared/models/list/IList";
-import {Observable, ReplaySubject} from "rxjs";
+import {Observable, ReplaySubject, Subject} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +15,9 @@ export class DashboardService {
 
   newList = {} as IList;
   baseUrl = environment.apiUrl;
+
+  public isAdded = new Subject<boolean>()
+  public idAdded$ = this.isAdded.asObservable()
 
 
 

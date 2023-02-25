@@ -1,6 +1,4 @@
-  <div class="add-task flex w-100 ">
-    <mat-form-field  appearance="outline" class="w-96 add-task-input">
-      <input matInput placeholder="Add a new task" [(ngModel)]="taskTitle">
-    </mat-form-field>
-    <i (click)="addTask()" class="bi bi-plus-circle px-3"></i>
+  <div class="add-task flex w-100 pb-2 ">
+      <input matInput placeholder="Add a new task" class="task-title" [(ngModel)]="taskTitle">
+      <i (click)="addTask()" class="bi bi-plus-circle px-3" matTooltip="Add new task"></i>
   </div>

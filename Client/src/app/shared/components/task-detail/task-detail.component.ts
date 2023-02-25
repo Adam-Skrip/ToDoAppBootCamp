@@ -26,7 +26,9 @@ export class TaskDetailComponent implements OnInit {
 
 
   deleteTask(id: string) {
-    this.dashboradService.deleteTask(id).subscribe();
+    this.dashboradService.deleteTask(id).subscribe(() =>{
+      this.dialogRef.close();
+    });
   }
 
   updateTask(data: ITaskResult) {

@@ -6,7 +6,7 @@
 .task-list{
   margin: 30px 10px;
   width: calc((100% / 4) - 20px);
-  min-height: 200px;
+  height: fit-content;
   border: 2px solid #EEEEEE;
   border-radius: 15px;
 }
