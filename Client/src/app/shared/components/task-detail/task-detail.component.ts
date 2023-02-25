@@ -1,7 +1,9 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {MAT_DIALOG_DATA} from "@angular/material/dialog";
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {ITaskResult} from "../../models/task/ITaskResult";
 import * as moment from "moment/moment";
+import {DashboardService} from "../../../dashboard/dashboard.service";
+import {ITask} from "../../models/task/ITask";
 
 @Component({
   selector: 'app-task-detail',
@@ -11,7 +13,10 @@ import * as moment from "moment/moment";
 export class TaskDetailComponent implements OnInit {
   tempDate!: Date;
   date: string = "";
-  constructor(@Inject(MAT_DIALOG_DATA) public data : ITaskResult) {
+  constructor(@Inject(MAT_DIALOG_DATA) public data : ITaskResult,
+              private dashboradService: DashboardService,
+              private dialogRef: MatDialogRef<TaskDetailComponent>
+              ) {
   }
 
   ngOnInit(): void {
@@ -20,5 +25,19 @@ export class TaskDetailComponent implements OnInit {
   }
 
 
+  deleteTask(id: string) {
+    this.dashboradService.deleteTask(id).subscribe();
+  }
 
+  updateTask(data: ITaskResult) {
+    let task = {} as ITask;
+    let id = data.publicId;
+    task.title = data.title;
+    task.description = data.description;
+    task.status = data.status;
+    this.dashboradService.updateTask(id,task).subscribe(()=>{
+      this.dialogRef.close();
+    });
+
+  }
 }

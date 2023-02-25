@@ -22,30 +22,22 @@ export class DashboardService {
 
 
 
-
-  getAllTasks() {
-    return this.http.get<ITaskResult[]>(this.baseUrl+"task");
-  }
-
-  getTask(){
-
-  }
-
-
-
+  //TASK
   addTask(task: ITask, basketId : string){
     return this.http.post(this.baseUrl+"task/new/?basketId="+basketId, task,this.httpOptions);
 
   }
 
-  update(task: ITask){
+  updateTask(id:string,task: ITask){
+    return this.http.put(this.baseUrl+"task/update/?questId="+id,task, this.httpOptions);
 
   }
 
-  removeTask(task: ITask){
-
+  deleteTask(id:string){
+    return this.http.delete(this.baseUrl+"task/remove?publicId="+ id, this.httpOptionsDelete);
   }
 
+  //LIST
   addList(list:IList){
     console.log(list)
     console.log(this.httpOptions)
@@ -62,10 +54,14 @@ export class DashboardService {
     return this.http.get<IListResult[]>(this.baseUrl+"basket", this.httpOptions);
   }
 
+  updateList(id:string, name:string){
+    return this.http.put<IListResult>(this.baseUrl+"basket/update?publicId="+id+"&newBasket="+name,this.httpOptions)
+  }
   deleteList(id: string){
     return this.http.delete(this.baseUrl+"basket/remove?publicId="+ id, this.httpOptionsDelete);
   }
 
+  //TOKEN
   getToken() : string{
     let tempToken = localStorage.getItem('token');
     if (tempToken){
@@ -75,7 +71,7 @@ export class DashboardService {
 
   }
 
-
+  //AUTH
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
