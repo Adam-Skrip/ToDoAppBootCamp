@@ -92,3 +92,8 @@ mat-dialog-actions{
 .save-button{
   font-size: 22px;
 }
+
+.status-select:focus{
+  outline: none;
+
+}
