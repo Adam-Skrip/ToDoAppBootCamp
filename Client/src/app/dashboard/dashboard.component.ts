@@ -14,16 +14,10 @@ import {MessageService} from "../shared/snackbar/message.service";
 })
 export class DashboardComponent implements OnInit {
 
-  taskList: ITaskResult [] = [];
   lists: IListResult [] = [];
-
-  public taskTitle: string = "";
-  public taskDescription: string = "";
-
+  listId: string = "";
   constructor(private dashService: DashboardService, private messageService: MessageService, public dialog: MatDialog) {
   }
-
-
 
   ngOnInit(): void {
     this.getLists()
@@ -36,18 +30,19 @@ export class DashboardComponent implements OnInit {
 
   openTaskDetail(task: ITaskResult) {
     const dialogRef = this.dialog.open(TaskDetailComponent, {
+      disableClose: true,
       height: '500px',
       width: '450px',
       data : task
     });
-    dialogRef.afterClosed().subscribe()
+    dialogRef.afterClosed().subscribe(() =>{
+      this.getLists();
+    })
 
   }
 
 
-
   getLists(){
-
     this.dashService.getAllLists().subscribe((response: IListResult[]) =>{
       // for (let id = 0; id < response.length; id++){
       //   let data = {} as IListResult;
@@ -59,17 +54,24 @@ export class DashboardComponent implements OnInit {
       this.lists = response;
     console.log(response)
     })
-
   }
 
   deleteList(id: string) {
     this.dashService.deleteList(id).subscribe(() =>{
       this.getLists();
       this.messageService.successMessage("List was deleted")
-
     })
-
   }
 
+  getListId(id: string){
+    this.listId = id;
+  }
 
+  updateList(event: any) {
+    let name = event.target.value;
+    this.dashService.updateList(this.listId,name).subscribe((response)=>{
+      console.log(response)
+      this.getLists();
+    })
+  }
 }

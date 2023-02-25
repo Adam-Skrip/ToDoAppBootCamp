@@ -6,6 +6,7 @@ import {MatButtonModule} from "@angular/material/button";
 import {MatSnackBarModule} from "@angular/material/snack-bar";
 import {MatDialogModule} from "@angular/material/dialog";
 import {MatListModule} from "@angular/material/list";
+import {MatTooltipModule} from "@angular/material/tooltip";
 
 const modules = [
   MatInputModule,
@@ -14,7 +15,8 @@ const modules = [
   MatButtonModule,
   MatSnackBarModule,
   MatDialogModule,
-  MatListModule
+  MatListModule,
+  MatTooltipModule
 ]
 
 @NgModule({

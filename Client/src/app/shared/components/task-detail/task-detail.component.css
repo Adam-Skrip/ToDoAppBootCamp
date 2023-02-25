@@ -1,9 +1,9 @@
 .dialog-header{
-
+  position: relative;
 }
 
 .date{
-  width: 200px;
+  width: 100%!important;
 }
 
 .title{
@@ -42,12 +42,15 @@
   cursor:text;
 }
 
-.close {
+.close-icon {
+  position: absolute;
+  right: 24px;
+  top: 25px;
   cursor: pointer;
-  vertical-align: middle;
+  font-size: 20px;
 }
 
-.close:hover {
+.close-icon:hover {
   color: #F50057;
 }
 
@@ -68,5 +71,24 @@
 }
 
 .close-span{
-  width: 100%;
+
+}
+
+mat-dialog-actions{
+  padding : 8px 24px!important;
+  justify-content: space-between;
+}
+
+.remove-icon{
+  cursor: pointer;
+  color: #3E363F;
+  font-size: 30px;
+}
+
+.remove-icon:hover{
+  color: #F50057;
+}
+
+.save-button{
+  font-size: 22px;
 }

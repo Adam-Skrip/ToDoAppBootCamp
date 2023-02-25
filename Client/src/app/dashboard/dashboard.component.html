@@ -1,7 +1,9 @@
 <div class="dashboard flex align-middle flex-wrap">
   <div class="task-list py-2 px-3" *ngFor="let list of lists">
-    <div class="flex justify-between align-middle list-title"><span class="text-2xl px-3">{{list.name}}</span><i
-      class="bi bi-x-lg remove" (click)="deleteList(list.publicId)"></i></div>
+    <div class="flex justify-between align-middle list-title">
+      <input class="text-2xl px-3 list-input" (focusout)="updateList($event)" (focusin)="getListId(list.publicId)" name="listName" [(ngModel)]="list.name">
+      <i class="bi bi-x-lg remove" (click)="deleteList(list.publicId)"></i>
+    </div>
     <div class="flex justify-between flex-col list-content">
       <mat-selection-list class="task" *ngFor="let task of list.quests">
         <mat-list-option [class.done]="task.status === 'Done'"

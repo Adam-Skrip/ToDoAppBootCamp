@@ -11,6 +11,13 @@
   border-radius: 15px;
 }
 
+.list-input{
+  width: 90%;
+}
+
+.list-input:focus{
+  outline-color: #F50057;
+}
 
 .add-list {
   cursor: pointer;
@@ -64,11 +71,12 @@
   border-bottom: 1px solid #EEEEEE;
 }
 
-  ::ng-deep.mat-pseudo-checkbox {
-    display: none !important;
-  }
+::ng-deep.mat-pseudo-checkbox {
+  display: none !important;
+}
 
 
-  .done{
-    text-decoration: line-through;
-  }
+.done{
+  text-decoration: line-through;
+}
+
