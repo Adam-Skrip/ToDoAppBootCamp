@@ -6,6 +6,7 @@ import {AddListComponent} from "../shared/components/add-list/add-list.component
 import {MatDialog} from "@angular/material/dialog";
 import {TaskDetailComponent} from "../shared/components/task-detail/task-detail.component";
 import {MessageService} from "../shared/snackbar/message.service";
+import {CdkDragDrop, moveItemInArray, transferArrayItem} from "@angular/cdk/drag-drop";
 
 @Component({
   selector: 'app-dashboard',
@@ -16,6 +17,12 @@ export class DashboardComponent implements OnInit {
 
   lists: IListResult [] = [];
   listId: string = "";
+
+  taskId: string = "";
+  oldBasketId : string = "";
+  newBasketId : string = "";
+
+
 
   constructor(public dashService: DashboardService, private messageService: MessageService, public dialog: MatDialog) {
   }
@@ -66,6 +73,10 @@ export class DashboardComponent implements OnInit {
     })
   }
 
+  getIds(oldId: string, taskId: string){
+    this.oldBasketId = oldId;
+    this.taskId = taskId;
+  }
   getListId(id: string){
     this.listId = id;
   }
@@ -77,6 +88,31 @@ export class DashboardComponent implements OnInit {
       this.getLists();
     })
   }
+
+  migrateTask(oldId:string, newId: string, taskId: string){
+    return this.dashService.migrateTask(oldId,newId,taskId).subscribe(()=>{
+      this.getLists();
+    })
+  }
+
+  drop(event: CdkDragDrop<any,any>, id : string) {
+    console.log(event)
+
+    this.newBasketId = id;
+    if (event.previousContainer === event.container) {
+      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+    } else {
+      transferArrayItem(
+        event.previousContainer.data,
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex,
+      );
+      this.migrateTask(this.oldBasketId,this.newBasketId,this.taskId);
+    }
+  }
+
+
 
 
 }
