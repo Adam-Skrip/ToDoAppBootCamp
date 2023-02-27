@@ -14,7 +14,7 @@ export class AddListComponent {
   constructor(private dashboardService: DashboardService, public refDialog : MatDialogRef<AddListComponent>) {
   }
   onSubmit(list : IList) {
-    if(list){
+    if(list.name){
       this.dashboardService.addList(list).subscribe(()=>{
         this.refDialog.close();
       })

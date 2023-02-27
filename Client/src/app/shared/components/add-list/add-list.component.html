@@ -2,7 +2,8 @@
 <mat-dialog-content>
   <mat-form-field appearance="fill">
     <mat-label>List Name</mat-label>
-    <input matInput [(ngModel)]="list.name" name="listName">
+    <input matInput [(ngModel)]="list.name" name="listName" required>
+    <mat-error >Please enter list name</mat-error>
   </mat-form-field>
 </mat-dialog-content>
 <mat-dialog-actions align="end">

@@ -2,6 +2,7 @@ import {Component, Input} from '@angular/core';
 import {DashboardService} from "../../../dashboard/dashboard.service";
 import {ITask} from "../../models/task/ITask";
 import {Subject} from "rxjs";
+import {MessageService} from "../../snackbar/message.service";
 
 @Component({
   selector: 'app-add-task',
@@ -12,7 +13,7 @@ export class AddTaskComponent{
   @Input("idInput") basketId! : string;
 
   taskTitle: string = "";
-  constructor(private ds : DashboardService) {
+  constructor(private ds : DashboardService, private ms: MessageService) {
   }
 
   addTask() {
@@ -20,9 +21,15 @@ export class AddTaskComponent{
     newTask.title = this.taskTitle;
     newTask.description = "";
     newTask.status = "";
-    this.ds.addTask(newTask,this.basketId).subscribe(()=>{
-      this.ds.isAdded.next(true);
-    });
+    if(this.taskTitle){
+      this.ds.addTask(newTask,this.basketId).subscribe(()=>{
+        this.ds.isAdded.next(true);
+      });
+    }
+    else{
+      this.ms.errorMessage("Task name is empty")
+    }
+
 
   }
 
