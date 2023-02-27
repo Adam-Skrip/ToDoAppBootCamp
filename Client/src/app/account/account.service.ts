@@ -25,7 +25,6 @@ export class AccountService {
   login(user: IUser) {
     return this.http.post(this.baseUrl + "login",user, {responseType:"text"}).pipe(
       map(response => {
-        console.log(response);
         this.setToken(response, user);
       }),
       catchError(err => this.processError(err))
@@ -34,7 +33,16 @@ export class AccountService {
   }
 
   register(newUser: IUserRegister){
-    return this.http.post(this.baseUrl + "register", newUser)
+    return this.http.post(this.baseUrl + "register", newUser,{observe:"response"}).pipe(
+      map(response => {
+        if (response.status == 201){
+          this.router.navigateByUrl('login').then(r => {
+            this.messageService.successMessage("User was successfully registered")
+          })
+        }
+      }),
+      catchError(err => this.processError(err))
+    );
 
   }
 
@@ -74,9 +82,13 @@ export class AccountService {
         this.messageService.errorMessage("Wrong credentials");
         return EMPTY;
       }
-      if (error.status < 500) {
-        const message = error.error.errorMessage || JSON.parse(error.error).errorMessage;
-        this.messageService.errorMessage(message);
+      if (error.status === 400){
+        this.messageService.errorMessage("Bad request");
+        return EMPTY;
+      }
+      if (error.status <= 500) {
+        console.log(error.error)
+        this.messageService.errorMessage(error.error);
         return EMPTY;
       }
       this.messageService.errorMessage("Server failed");

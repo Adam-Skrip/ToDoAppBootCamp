@@ -15,7 +15,6 @@ export class LoginComponent {
   }
 
   login(user : IUser) {
-
     this.accountService.login(user).subscribe()
 
     }
