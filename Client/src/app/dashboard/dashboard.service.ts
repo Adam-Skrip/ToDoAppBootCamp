@@ -45,8 +45,6 @@ export class DashboardService {
 
   //LIST
   addList(list:IList){
-    console.log(list)
-    console.log(this.httpOptions)
     return this.http.post(this.baseUrl+"basket/new", list, this.httpOptions );
   }
 
