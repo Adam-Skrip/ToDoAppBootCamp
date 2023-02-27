@@ -4,6 +4,7 @@ import {ITaskResult} from "../../models/task/ITaskResult";
 import * as moment from "moment/moment";
 import {DashboardService} from "../../../dashboard/dashboard.service";
 import {ITask} from "../../models/task/ITask";
+import {MessageService} from "../../snackbar/message.service";
 
 @Component({
   selector: 'app-task-detail',
@@ -15,7 +16,8 @@ export class TaskDetailComponent implements OnInit {
   date: string = "";
   constructor(@Inject(MAT_DIALOG_DATA) public data : ITaskResult,
               private dashboradService: DashboardService,
-              private dialogRef: MatDialogRef<TaskDetailComponent>
+              private dialogRef: MatDialogRef<TaskDetailComponent>,
+              private messageService: MessageService
               ) {
   }
 
@@ -37,9 +39,15 @@ export class TaskDetailComponent implements OnInit {
     task.title = data.title;
     task.description = data.description;
     task.status = data.status;
-    this.dashboradService.updateTask(id,task).subscribe(()=>{
-      this.dialogRef.close();
-    });
+    if (task.title){
+      this.dashboradService.updateTask(id,task).subscribe(()=>{
+        this.dialogRef.close();
+      });
+    }
+    else {
+      this.messageService.errorMessage("Task name cannot be empty!")
+    }
+
   }
 
   onChangeStatus($event : any){

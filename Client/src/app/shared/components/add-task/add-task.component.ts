@@ -27,7 +27,7 @@ export class AddTaskComponent{
       });
     }
     else{
-      this.ms.errorMessage("Task name is empty")
+      this.ms.errorMessage("Task name cannot be empty!")
     }
 
 

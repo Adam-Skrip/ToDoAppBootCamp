@@ -9,7 +9,7 @@ export class MessageService {
   constructor(private snackBar: MatSnackBar) { }
 
   successMessage(message:string, duration:number = 5000) {
-    this.snackBar.open(message, 'Success', {duration});
+    this.snackBar.open(message, '', {duration});
   }
 
   errorMessage(message:string, duration:number = 5000) {

@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import {SharedModule} from "../shared/shared.module";
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {RouterLink} from "@angular/router";
 
 
@@ -13,12 +13,13 @@ import {RouterLink} from "@angular/router";
     LoginComponent,
     RegisterComponent
   ],
-  imports: [
-    CommonModule,
-    SharedModule,
-    FormsModule,
-    RouterLink
-  ],
+    imports: [
+        CommonModule,
+        SharedModule,
+        FormsModule,
+        RouterLink,
+        ReactiveFormsModule
+    ],
   exports : [
     LoginComponent,
     RegisterComponent

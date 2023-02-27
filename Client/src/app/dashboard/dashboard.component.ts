@@ -83,10 +83,17 @@ export class DashboardComponent implements OnInit {
 
   updateList(event: any) {
     let name = event.target.value;
-    this.dashService.updateList(this.listId,name).subscribe((response)=>{
-      console.log(response)
-      this.getLists();
-    })
+    if(name){
+      this.dashService.updateList(this.listId,name).subscribe((response)=>{
+        console.log(response)
+        this.getLists();
+      })
+    }
+    else {
+      this.messageService.errorMessage("List name cannot be empty!")
+      this.getLists()
+    }
+
   }
 
   migrateTask(oldId:string, newId: string, taskId: string){

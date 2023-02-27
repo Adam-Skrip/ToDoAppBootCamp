@@ -3,7 +3,7 @@ import {HttpClient, HttpErrorResponse} from "@angular/common/http";
 import {IUser} from "../shared/models/IUser";
 import {environment} from "../../environments/environment";
 import {IUserRegister} from "../shared/models/IUserRegister";
-import {catchError, EMPTY, map, Observable, ReplaySubject} from "rxjs";
+import {catchError, EMPTY, map, Observable, ReplaySubject, Subject} from "rxjs";
 import {Router} from "@angular/router";
 import {MessageService} from "../shared/snackbar/message.service";
 import {IList} from "../shared/models/list/IList";
@@ -13,8 +13,8 @@ import {IList} from "../shared/models/list/IList";
 })
 export class AccountService {
 
-  private currentUserSource = new ReplaySubject<IUser | null>(1);
-  currentUser$ = this.currentUserSource.asObservable();
+  public currentUser = new Subject<IUser|null>()
+  public currentUser$ = this.currentUser.asObservable()
 
 
 
@@ -25,7 +25,6 @@ export class AccountService {
   login(user: IUser) {
     return this.http.post(this.baseUrl + "login",user, {responseType:"text"}).pipe(
       map(response => {
-        console.log(response);
         this.setToken(response, user);
       }),
       catchError(err => this.processError(err))
@@ -34,13 +33,23 @@ export class AccountService {
   }
 
   register(newUser: IUserRegister){
-    return this.http.post(this.baseUrl + "register", newUser)
+    return this.http.post(this.baseUrl + "register", newUser,{observe:"response"}).pipe(
+      map(response => {
+        if (response.status == 201){
+          this.router.navigateByUrl('login').then(r => {
+            this.messageService.successMessage("User was successfully registered")
+          })
+        }
+      }),
+      catchError(err => this.processError(err))
+    );
 
   }
 
   logout(){
     localStorage.removeItem('token');
-    this.currentUserSource.next(null);
+    localStorage.removeItem('user')
+    this.currentUser.next(null);
     this.router.navigateByUrl('home').then(() => {
       this.messageService.successMessage("Logout successfully")
     } );
@@ -53,13 +62,15 @@ export class AccountService {
   private  setToken(value: string, user: IUser) {
     if (value) {
       localStorage.setItem('token', value);
+      localStorage.setItem('user',user.username)
       this.router.navigateByUrl("dashboard").then(() => {
         this.messageService.successMessage("Logged in successfully")
       } )
-      this.currentUserSource.next(user);
+      this.currentUser.next(user);
     } else {
       localStorage.removeItem('token');
-      this.currentUserSource.next(null)
+      localStorage.removeItem('user')
+      this.currentUser.next(null)
     }
   }
 
@@ -74,9 +85,13 @@ export class AccountService {
         this.messageService.errorMessage("Wrong credentials");
         return EMPTY;
       }
-      if (error.status < 500) {
-        const message = error.error.errorMessage || JSON.parse(error.error).errorMessage;
-        this.messageService.errorMessage(message);
+      if (error.status === 400){
+        this.messageService.errorMessage("Bad request");
+        return EMPTY;
+      }
+      if (error.status <= 500) {
+        console.log(error.error)
+        this.messageService.errorMessage(error.error);
         return EMPTY;
       }
       this.messageService.errorMessage("Server failed");

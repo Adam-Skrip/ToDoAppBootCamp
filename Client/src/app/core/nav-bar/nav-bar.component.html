@@ -14,8 +14,9 @@
       <li class="rounded-md border-solid button border-2 "><a class="px-2" routerLink="/register">Register</a></li>
     </div>
 
-    <div *ngIf="this.as.isLoggedIn()" class="flex text-white">
-      <li class="rounded-md border-solid border-2 button mr-3 "><a class="px-2" (click)="logout()" >Logout</a></li>
+    <div *ngIf="this.as.isLoggedIn()" class="flex items-center">
+      <li>{{username}}</li>
+      <li class="rounded-md border-solid border-2 button mr-3 text-white "><a class="px-2" (click)="logout()" >Logout</a></li>
     </div>
 
 
