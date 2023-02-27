@@ -27,7 +27,7 @@ public class TaskService : ITaskService
 
         if (user == null)
         {
-            throw new Exception("User doesnt exist!");
+            throw new Exception("User doesnt exists!");
         }
 
         Quest findQuest = await _context.Quests
@@ -50,7 +50,7 @@ public class TaskService : ITaskService
 
         if (user == null)
         {
-            throw new Exception("User doesnt exist!");
+            throw new Exception("User doesnt exists!");
         }
 
         var findBasket = await _context.Baskets.SingleOrDefaultAsync(x => x.PublicId == basketId, ct);
@@ -82,7 +82,7 @@ public class TaskService : ITaskService
 
         if (user == null)
         {
-            throw new Exception("User doesnt exist!");
+            throw new Exception("User doesnt exists!");
         }
 
         var quest = await _context.Quests.AsNoTracking().SingleOrDefaultAsync(q => q.PublicId == taskId, ct);
@@ -102,12 +102,12 @@ public class TaskService : ITaskService
 
         if (user == null)
         {
-            throw new Exception("User doesnt exist!");
+            throw new Exception("User doesnt exists!");
         }
 
         if (questDto == null)
         {
-            throw new Exception($"Invalid task request: {questDto}");
+            throw new Exception($"Invalid task request: {questDto}!");
         }
 
         Quest uQuest = await _context.Quests
