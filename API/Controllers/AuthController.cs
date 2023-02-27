@@ -35,7 +35,7 @@ public class AuthController : ControllerBase
     }
 
     [HttpPost("login")]
-    [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(string))]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(string))]
     [SwaggerOperation(
         summary: "Login User",
         description: "Login a User",

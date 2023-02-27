@@ -1,6 +1,9 @@
-﻿using System.IdentityModel.Tokens.Jwt;
+﻿using System.ComponentModel.DataAnnotations;
+using System.IdentityModel.Tokens.Jwt;
+using System.Net.Mail;
 using System.Security.Claims;
 using System.Text;
+using System.Text.RegularExpressions;
 using API.Database;
 using API.Entities.Domain;
 using API.Entities.DTO;
@@ -25,6 +28,17 @@ public class AuthService : IAuthService
 
     public async Task<int> Register(UserDto userDto)
     {
+        try
+        {
+            MailAddress mail = new MailAddress(userDto.Email);
+        }
+        catch (Exception e)
+        {
+            throw new Exception("Invalid email format!");
+        }
+        
+        
+        
         if (await UserExists(userDto.Username))
         {
             throw new Exception("User already exists!");
@@ -61,7 +75,7 @@ public class AuthService : IAuthService
         
         if (!VerifyPasswordHash(password, user.PasswordHash, user.PasswordSalt))
         {
-            throw new Exception("Bad password");
+            throw new Exception("Bad password!");
         }
         
         return CreateToken(user);

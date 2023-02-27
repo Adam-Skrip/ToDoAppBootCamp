@@ -39,7 +39,7 @@ public class BasketService : IBasketService
 
         if (user == null)
         {
-            throw new Exception("User doesnt exist!");
+            throw new Exception("User doesnt exists!");
         }
 
         var questBasket = new QuestBasket
@@ -61,7 +61,7 @@ public class BasketService : IBasketService
 
         if (user == null)
         {
-            throw new Exception("User doesnt exist!");
+            throw new Exception("User doesnt exists!");
         }
 
         if (publicId == null)
@@ -90,7 +90,7 @@ public class BasketService : IBasketService
 
         if (user == null)
         {
-            throw new Exception("User doesnt exist!");
+            throw new Exception("User doesnt exists!");
         }
 
         if (publicId == null)
@@ -126,7 +126,7 @@ public class BasketService : IBasketService
 
         if (user == null)
         {
-            throw new Exception("User doesnt exist!");
+            throw new Exception("User doesnt exists!");
         }
         
         if (publicId == null)
@@ -155,7 +155,7 @@ public class BasketService : IBasketService
 
         if (user == null)
         {
-            throw new Exception("User doesnt exist!");
+            throw new Exception("User doesnt exists!");
         }
 
         var findBasket = await _context.Baskets.SingleOrDefaultAsync(x => x.PublicId == newBasketId, ct);
